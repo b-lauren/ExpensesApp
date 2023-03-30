@@ -6,6 +6,7 @@ import { AllExpenses } from './screens/AllExpenses';
 import { Ionicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { ManageExpenses } from './screens/ManageExpenses';
+import { GlobalStyles } from './constants/styles';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -15,7 +16,7 @@ const TabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: '#A498E1' },
+        headerStyle: { backgroundColor: GlobalStyles.primary100 },
         headerTintColor: 'white',
         tabBarStyle: { backgroundColor: '#000' },
         tabBarActiveTintColor: '#A498E1',
