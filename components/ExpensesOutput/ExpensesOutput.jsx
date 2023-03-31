@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { ExpensesList } from './ExpensesList';
 import { ExpensesSummary } from './ExpensesSummary';
 
@@ -25,9 +25,16 @@ const DUMMY_EXPENSES = [
 
 export const ExpensesOutput = ({ expenses }) => {
   return (
-    <View>
+    <View style={styles.outputContainer}>
       <ExpensesSummary expenses={DUMMY_EXPENSES} />
       <ExpensesList expenses={DUMMY_EXPENSES} />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  outputContainer: {
+    height: '100%',
+    padding: 30,
+  },
+});
