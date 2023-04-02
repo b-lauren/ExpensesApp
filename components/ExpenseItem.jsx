@@ -47,9 +47,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 4,
     minWidth: 80,
+    backgroundColor: GlobalStyles.primary100,
   },
   amount: {
-    color: GlobalStyles.primary200,
+    color: 'white',
     fontWeight: 'bold',
   },
 });

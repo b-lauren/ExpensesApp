@@ -7,6 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { ManageExpenses } from './screens/ManageExpenses';
 import { GlobalStyles } from './constants/styles';
+import { IconButton } from './components/UI/IconButton';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -20,6 +21,10 @@ const TabNavigator = () => {
         headerTintColor: 'white',
         tabBarStyle: { backgroundColor: '#000' },
         tabBarActiveTintColor: '#A498E1',
+        headerRight: () => {
+          <IconButton />;
+        },
+        animationEnabled: false,
       }}
     >
       <Tab.Screen

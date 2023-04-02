@@ -17,7 +17,7 @@ export const ExpensesSummary = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    backgroundColor: GlobalStyles.primary200,
+    backgroundColor: GlobalStyles.black,
     justifyContent: 'center',
     borderRadius: 6,
     marginBottom: 12,
