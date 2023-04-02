@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalStyles.primary200,
     justifyContent: 'center',
     borderRadius: 6,
+    marginBottom: 12,
   },
   summaryText: {
     fontSize: 18,

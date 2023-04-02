@@ -4,4 +4,7 @@ export const GlobalStyles = {
   primary200: '#5648A0',
   secondary100: '#FEDCE0',
   tertiary100: '#F8ECAD',
+  grey100: '#EAEAEA',
+  grey200: '#CCCCCC',
+  grey300: '#A6A6A6',
 };

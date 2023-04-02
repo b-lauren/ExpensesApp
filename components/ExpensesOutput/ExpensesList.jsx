@@ -5,9 +5,10 @@ export const ExpensesList = ({ expenses }) => {
   return (
     <View>
       <FlatList
+        showsVerticalScrollIndicator={false}
         data={expenses}
         keyExtractor={(item) => item.id}
-        renderItem={(itemData) => <ExpensesItem data={itemData.item} />}
+        renderItem={(itemData) => <ExpensesItem {...itemData.item} />}
       />
     </View>
   );
