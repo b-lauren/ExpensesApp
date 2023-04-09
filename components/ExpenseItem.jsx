@@ -1,11 +1,23 @@
 import { Pressable, Text, View, StyleSheet } from 'react-native';
 import { GlobalStyles } from '../constants/styles';
 import { getFormattedDate } from '../util/date';
+import { useNavigation } from '@react-navigation/native';
 
-export const ExpensesItem = ({ description, amount, date }) => {
+export const ExpensesItem = ({ id, description, amount, date }) => {
   //Should be able to click on these to edit and delete
+  const navigation = useNavigation();
+
+  const expensePress = () => {
+    console.log('expense pressed');
+    navigation.navigate('ManageExpenses', {
+      expenseId: id,
+    });
+  };
   return (
-    <Pressable>
+    <Pressable
+      onPress={expensePress}
+      style={({ pressed }) => pressed && styles.pressed}
+    >
       <View style={styles.container}>
         <View>
           <Text style={styles.description}>{description}</Text>
@@ -20,6 +32,9 @@ export const ExpensesItem = ({ description, amount, date }) => {
 };
 
 const styles = StyleSheet.create({
+  pressed: {
+    opacity: 0.75,
+  },
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',

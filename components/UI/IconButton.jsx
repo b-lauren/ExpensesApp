@@ -1,4 +1,4 @@
-import { Text, View, Pressable, StyleSheet } from 'react-native';
+import { View, Pressable, StyleSheet } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
 export const IconButton = ({ onPress }) => {
@@ -8,7 +8,7 @@ export const IconButton = ({ onPress }) => {
       style={({ pressed }) => pressed && styles.pressed}
     >
       <View style={styles.container}>
-        <AntDesign name="plussquare" size={24} color="white" />
+        <AntDesign name="plussquare" size={22} color="white" />
       </View>
     </Pressable>
   );
@@ -16,8 +16,7 @@ export const IconButton = ({ onPress }) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 6,
-    margin: 8,
+    margin: 12,
   },
   pressed: {
     opacity: 0.75,
