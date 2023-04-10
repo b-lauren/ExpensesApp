@@ -1,13 +1,16 @@
 import { Text, View, StyleSheet } from 'react-native';
 import { GlobalStyles } from '../../constants/styles';
 
-export const ExpensesSummary = () => {
+export const ExpensesSummary = ({ expenses, periodName }) => {
+  const expensesSum = expenses.reduce((sum, expense) => {
+    return sum + expense.amount;
+  }, 0);
   return (
     <View>
       <View style={styles.container}>
-        <Text style={styles.summaryText}>In the Last 7 Days</Text>
+        <Text style={styles.summaryText}>In {periodName}</Text>
         <Text style={styles.summaryText}>
-          you spent <Text style={styles.sum}> £5.99</Text>
+          you spent <Text style={styles.sum}>£{expensesSum.toFixed(2)}</Text>
         </Text>
       </View>
     </View>

@@ -4,8 +4,7 @@ import { ExpensesOutput } from '../components/ExpensesOutput/ExpensesOutput';
 export const AllExpenses = () => {
   return (
     <View>
-      {/* <Text>All Expenses Page</Text> */}
-      <ExpensesOutput />
+      <ExpensesOutput expensesPeriod="Total" />
     </View>
   );
 };
