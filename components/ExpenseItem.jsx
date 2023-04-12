@@ -8,7 +8,6 @@ export const ExpensesItem = ({ id, description, amount, date }) => {
   const navigation = useNavigation();
 
   const expensePress = () => {
-    console.log('expense pressed');
     navigation.navigate('ManageExpenses', {
       expenseId: id,
     });

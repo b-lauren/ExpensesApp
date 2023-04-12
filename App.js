@@ -8,6 +8,7 @@ import { ManageExpenses } from './screens/ManageExpenses';
 import { GlobalStyles } from './constants/styles';
 import { IconButton } from './components/UI/IconButton';
 import { AntDesign } from '@expo/vector-icons';
+import ExpensesContextProvider from './store/expenses-context';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -61,28 +62,30 @@ const TabNavigator = () => {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: { backgroundColor: GlobalStyles.primary100 },
-          headerTintColor: 'white',
-        }}
-      >
-        <Stack.Screen
-          name="Home"
-          component={TabNavigator}
-          options={{
-            headerShown: false,
+    <ExpensesContextProvider>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: { backgroundColor: GlobalStyles.primary100 },
+            headerTintColor: 'white',
           }}
-        />
-        <Stack.Screen
-          name="ManageExpenses"
-          component={ManageExpenses}
-          options={{
-            presentation: 'modal',
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+        >
+          <Stack.Screen
+            name="Home"
+            component={TabNavigator}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="ManageExpenses"
+            component={ManageExpenses}
+            options={{
+              presentation: 'modal',
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ExpensesContextProvider>
   );
 }
