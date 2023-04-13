@@ -57,7 +57,7 @@ const DUMMY_EXPENSES = [
   },
   {
     id: '10',
-    description: 'Berenjak',
+    description: 'Berenjakk',
     amount: 106.5,
     date: new Date('2023-04-10'),
   },
