@@ -4,6 +4,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { GlobalStyles } from '../constants/styles';
 import { Button } from '../components/UI/Button';
 import { ExpensesContext } from '../store/expenses-context';
+import { ExpenseForm } from '../components/ManageExpense/ExpenseForm';
 
 export const ManageExpenses = ({ route, navigation }) => {
   const expensesCtx = useContext(ExpensesContext);
@@ -45,6 +46,7 @@ export const ManageExpenses = ({ route, navigation }) => {
 
   return (
     <View style={styles.mainContainer}>
+      <ExpenseForm />
       <View style={styles.buttonContainer}>
         <Button style={styles.buttons} mode="flat" onPress={cancelHandler}>
           Cancel
@@ -86,6 +88,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttons: {
+    paddingTop: 16,
     minWidth: 120,
     marginHorizontal: 8,
   },
