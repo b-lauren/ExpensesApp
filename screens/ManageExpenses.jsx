@@ -12,6 +12,14 @@ export const ManageExpenses = ({ route, navigation }) => {
   const editedExpenseId = route.params?.expenseId;
   const editingExpense = !!editedExpenseId;
 
+  // const selectedExpense = expensesCtx.expenses.find((expense) => {
+  //   expense.id === editedExpenseId;
+  // });
+
+  const selectedExpense = expensesCtx.expenses.find(
+    (expense) => expense.id === editedExpenseId
+  );
+
   useLayoutEffect(() => {
     navigation.setOptions({
       title: editingExpense ? 'Edit Expense' : 'Add Expense',
@@ -27,34 +35,23 @@ export const ManageExpenses = ({ route, navigation }) => {
     navigation.goBack();
   };
 
-  const confirmHandler = () => {
+  const confirmHandler = (expenseData) => {
     if (editingExpense) {
-      expensesCtx.updateExpense(editedExpenseId, {
-        description: 'Test!!',
-        amount: 39.99,
-        date: new Date('2023-02-22'),
-      });
+      expensesCtx.updateExpense(editedExpenseId, expenseData);
     } else {
-      expensesCtx.addExpense({
-        description: 'Test',
-        amount: 19.99,
-        date: new Date('2023-01-19'),
-      });
+      expensesCtx.addExpense(expenseData);
     }
     navigation.goBack();
   };
 
   return (
     <View style={styles.mainContainer}>
-      <ExpenseForm />
-      <View style={styles.buttonContainer}>
-        <Button style={styles.buttons} mode="flat" onPress={cancelHandler}>
-          Cancel
-        </Button>
-        <Button style={styles.buttons} onPress={confirmHandler}>
-          {editingExpense ? 'Edit' : 'Add'}
-        </Button>
-      </View>
+      <ExpenseForm
+        submitButtonLabel={editingExpense ? 'Update' : 'Add'}
+        onCancel={cancelHandler}
+        onSubmit={confirmHandler}
+        defaultValues={selectedExpense}
+      />
       {editingExpense && (
         <View style={styles.deleteContainer}>
           <FontAwesome
@@ -81,15 +78,5 @@ const styles = StyleSheet.create({
     borderTopWidth: 2,
     borderTopColor: GlobalStyles.tertiary100,
     alignItems: 'center',
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttons: {
-    paddingTop: 16,
-    minWidth: 120,
-    marginHorizontal: 8,
   },
 });
