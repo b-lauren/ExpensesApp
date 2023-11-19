@@ -1,83 +1,9 @@
 import { createContext, useReducer } from 'react';
 
-const DUMMY_EXPENSES = [
-  {
-    id: '1',
-    description: 'Shoes',
-    amount: 78.99,
-    date: new Date('2022-12-19'),
-  },
-  {
-    id: '2',
-    description: 'Toiletries',
-    amount: 18.99,
-    date: new Date('2023-01-01'),
-  },
-  {
-    id: '3',
-    description: 'Book',
-    amount: 8.99,
-    date: new Date('2023-01-05'),
-  },
-  {
-    id: '4',
-    description: 'Make up',
-    amount: 78.99,
-    date: new Date('2022-12-19'),
-  },
-  {
-    id: '5',
-    description: 'Clothes',
-    amount: 18.99,
-    date: new Date('2023-01-01'),
-  },
-  {
-    id: '6',
-    description: 'Coffee',
-    amount: 8.99,
-    date: new Date('2023-01-05'),
-  },
-  {
-    id: '7',
-    description: 'Tea',
-    amount: 78.99,
-    date: new Date('2022-12-19'),
-  },
-  {
-    id: '8',
-    description: 'Dinner',
-    amount: 18.99,
-    date: new Date('2023-01-01'),
-  },
-  {
-    id: '9',
-    description: 'Coffee',
-    amount: 8.99,
-    date: new Date('2023-01-05'),
-  },
-  {
-    id: '10',
-    description: 'Berenjakk',
-    amount: 106.5,
-    date: new Date('2023-04-10'),
-  },
-  {
-    id: '11',
-    description: 'Fabrique',
-    amount: 18.99,
-    date: new Date('2023-04-12'),
-  },
-  {
-    id: '12',
-    description: 'Coffee',
-    amount: 4.99,
-    date: new Date('2023-04-12'),
-  },
-];
-
 export const ExpensesContext = createContext({
   expenses: [],
   addExpense: ({ description, amount, date }) => {},
+  setExpenses: (expenses) => {},
   deleteExpense: (id) => {},
   updateExpense: (id, { description, amount, date }) => {},
 });
@@ -86,8 +12,9 @@ export const ExpensesContext = createContext({
 const expensesReducer = (state, action) => {
   switch (action.type) {
     case 'ADD':
-      const id = new Date().toString() + Math.random().toString();
-      return [{ ...action.payload, id: id }, ...state];
+      return [action.payload, ...state];
+    case 'SET':
+      return action.payload;
     case 'UPDATE':
       //Find index of expense to update by ID
       const updateExpenseIndex = state.findIndex(
@@ -111,11 +38,15 @@ const expensesReducer = (state, action) => {
 
 const ExpensesContextProvider = ({ children }) => {
   //State management (context) logic
-  const [expensesState, dispatch] = useReducer(expensesReducer, DUMMY_EXPENSES);
+  const [expensesState, dispatch] = useReducer(expensesReducer, []);
 
   const addExpense = (expenseData) => {
     //Forward the incoming expense data to our reducer function by dispatching an action
     dispatch({ type: 'ADD', payload: expenseData });
+  };
+
+  const setExpenses = (expenses) => {
+    dispatch({ type: 'SET', payload: expenses });
   };
 
   const deleteExpense = (id) => {
@@ -129,6 +60,7 @@ const ExpensesContextProvider = ({ children }) => {
   //Bundle all of our data and functions together to expose them to the interested components through our Provider Component
   const value = {
     expenses: expensesState,
+    setExpenses: setExpenses,
     addExpense: addExpense,
     deleteExpense: deleteExpense,
     updateExpense: updateExpense,
