@@ -1,12 +1,15 @@
-import { useLayoutEffect, useContext } from 'react';
+import { useLayoutEffect, useContext, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { GlobalStyles } from '../constants/styles';
 import { ExpensesContext } from '../store/expenses-context';
 import { ExpenseForm } from '../components/ManageExpense/ExpenseForm';
 import { storeExpense, updateExpense, deleteExpense } from '../util/http';
+import { LoadingOverlay } from '../components/UI/LoadingOverlay';
 
 export const ManageExpenses = ({ route, navigation }) => {
+  const [isUpdating, setIsUpdating] = useState(false);
+
   const expensesCtx = useContext(ExpensesContext);
 
   const editedExpenseId = route.params?.expenseId;
@@ -23,6 +26,7 @@ export const ManageExpenses = ({ route, navigation }) => {
   }, [navigation, editingExpense]);
 
   const deleteExpense = async () => {
+    setIsUpdating(true);
     await deleteExpense(editedExpenseId);
     expensesCtx.deleteExpense(editedExpenseId);
     navigation.goBack();
@@ -33,6 +37,7 @@ export const ManageExpenses = ({ route, navigation }) => {
   };
 
   const confirmHandler = async (expenseData) => {
+    setIsUpdating(true);
     if (editingExpense) {
       expensesCtx.updateExpense(editedExpenseId, expenseData);
       await updateExpense(editedExpenseId, expenseData);
@@ -42,6 +47,10 @@ export const ManageExpenses = ({ route, navigation }) => {
     }
     navigation.goBack();
   };
+
+  if (isUpdating) {
+    return <LoadingOverlay />;
+  }
 
   return (
     <View style={styles.mainContainer}>
